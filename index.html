@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App VUE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module">
+        import { h, createApp } from "./node_modules/vue/dist/vue.esm-browser.prod.js";
+
+        const Login = {
+            data() {
+                return {
+                    username: "",
+                    password: ""
+                };
+            },
+            methods: {
+                submitForm(event) {
+                    event.preventDefault();
+                    alert(`Username: ${this.username}\nPassword: ${this.password}`);
+                }
+            },
+            render() {
+                return h('form', { onSubmit: this.submitForm }, [
+                    h('label', { for: 'username' }, 'Nom d\'utilisateur:'),
+                    h('input', {
+                        type: 'text',
+                        id: 'username',
+                        value: this.username,
+                        onInput: event => this.username = event.target.value
+                    }),
+                    h('br'),
+                    h('label', { for: 'password' }, 'Mot de passe:'),
+                    h('input', {
+                        type: 'password',
+                        id: 'password',
+                        value: this.password,
+                        onInput: event => this.password = event.target.value
+                    }),
+                    h('br'),
+                    h('button', { type: 'submit' }, 'Se connecter')
+                ]);
+            },
+        };
+
+        createApp(Login).mount('#root');
+    </script>
+</body>
+
+</html>
